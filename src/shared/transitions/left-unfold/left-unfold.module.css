@@ -1,0 +1,14 @@
+.enterActive {
+  transform: translateX(0);
+  transition: transform 1000ms;
+}
+.enterDone {
+  transform: translateX(0);
+}
+.exit {
+  transform: translateX(0);
+}
+.exitActive {
+  transform: translateX(-15vw);
+  transition: transform 1000ms;
+}
