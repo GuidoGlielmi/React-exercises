@@ -9,9 +9,19 @@ export default class CalculatorButton extends Component {
     this.press = this.press.bind(this);
     this.unpress = this.unpress.bind(this);
   }
+  componentDidMount() {
+    const actionOnKeyStroke = (e) => {
+      if (e.repeat) return;
+      if (e.keyCode === this.props.keyCodeTrigger) this.press();
+    };
+    if (this.props.keyCodeTrigger) {
+      window.addEventListener('keydown', actionOnKeyStroke);
+      window.addEventListener('keyup', this.unpress);
+    }
+  }
   press() {
     this.setState({ pressed: true });
-    !this.props.disabled && this.props.action();
+    this.props.action();
   }
   unpress() {
     this.setState({ pressed: false });

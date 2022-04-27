@@ -11,55 +11,55 @@ class Calculator extends Component {
         </div>
         <div className={styles.keyboard}>
           <div className={styles.allClear}>
-            <CalculatorButton>AC</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={8}>AC</CalculatorButton>
           </div>
           <div className={styles.divide}>
-            <CalculatorButton>/</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={111}>/</CalculatorButton>
           </div>
           <div className={styles.multiply}>
-            <CalculatorButton>X</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={106}>X</CalculatorButton>
           </div>
           <div className={styles.seven}>
-            <CalculatorButton>7</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={103}>7</CalculatorButton>
           </div>
           <div className={styles.eight}>
-            <CalculatorButton>8</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={104}>8</CalculatorButton>
           </div>
           <div className={styles.nine}>
-            <CalculatorButton>9</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={105}>9</CalculatorButton>
           </div>
           <div className={styles.minus}>
-            <CalculatorButton>-</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={109}>-</CalculatorButton>
           </div>
           <div className={styles.four}>
-            <CalculatorButton>4</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={100}>4</CalculatorButton>
           </div>
           <div className={styles.five}>
-            <CalculatorButton>5</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={101}>5</CalculatorButton>
           </div>
           <div className={styles.six}>
-            <CalculatorButton>6</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={102}>6</CalculatorButton>
           </div>
           <div className={styles.plus}>
-            <CalculatorButton>+</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={107}>+</CalculatorButton>
           </div>
           <div className={styles.one}>
-            <CalculatorButton>1</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={97}>1</CalculatorButton>
           </div>
           <div className={styles.two}>
-            <CalculatorButton>2</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={98}>2</CalculatorButton>
           </div>
           <div className={styles.three}>
-            <CalculatorButton>3</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={99}>3</CalculatorButton>
           </div>
           <div className={styles.cero}>
-            <CalculatorButton>0</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={96}>0</CalculatorButton>
           </div>
           <div className={styles.dot}>
-            <CalculatorButton>.</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={110}>.</CalculatorButton>
           </div>
           <div className={styles.equal}>
-            <CalculatorButton>=</CalculatorButton>
+            <CalculatorButton keyCodeTrigger={13}>=</CalculatorButton>
           </div>
         </div>
       </div>

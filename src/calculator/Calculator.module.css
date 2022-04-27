@@ -86,3 +86,23 @@
   grid-row: 4 / 6;
   background: blue;
 }
+
+.cero,
+.one,
+.two,
+.three,
+.four,
+.five,
+.six,
+.seven,
+.eight,
+.nine {
+  background: gray;
+}
+
+.multiply,
+.divide,
+.minus,
+.plus {
+  background: rgb(228, 228, 50);
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styles from './DrumMachine.module.css';
-import PadButton from '../shared/components/button/PadButton';
+import PadButton from '../shared/components/buttons/PadButton';
 import switchSideToSide from '../shared/transitions/switch-side-to-side/switchSideToSide.module.css';
 const drums = [
   {
