@@ -12,7 +12,6 @@ export default class PadButton extends Component {
   componentDidMount() {
     const actionOnKeyStroke = (e) => {
       if (e.repeat) return;
-      console.log(this.props.id);
       if (e.key === this.props.keyTrigger) this.press();
     };
     if (this.props.keyTrigger) {
