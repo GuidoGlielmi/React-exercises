@@ -17,6 +17,7 @@ class Calculator extends Component {
     this.enterOperator = this.enterOperator.bind(this);
     this.allClear = this.allClear.bind(this);
     this.calculate = this.calculate.bind(this);
+    this.erase = this.erase.bind(this);
   }
   appendToEnteredValue(value) {
     this.setState((ps) => {
@@ -37,39 +38,49 @@ class Calculator extends Component {
         ps.calculation += ` ${value} `;
       } else {
         if (value === '/') {
-          ps.result = ps.calculation = parseInt(ps.previousValue) / parseInt(ps.enteredValue);
+          ps.result = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
         }
         if (value === 'X') {
-          ps.result = ps.calculation = parseInt(ps.previousValue) * parseInt(ps.enteredValue);
+          ps.result = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
         }
         if (value === '-') {
-          ps.result = ps.calculation = parseInt(ps.previousValue) - parseInt(ps.enteredValue);
+          ps.result = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
         }
         if (value === '+') {
-          ps.result = ps.calculation = parseInt(ps.previousValue) + parseInt(ps.enteredValue);
+          ps.result = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
         }
+        if (!(ps.result % 1)) ps.result = Math.floor(ps.result);
         ps.calculation = `${ps.result} ${value} `;
-        ps.previousValue = ps.result;
+        ps.previousValue = `${ps.result}`;
         ps.enteredValue = value;
       }
+      return ps;
+    });
+  }
+  erase() {
+    this.setState((ps) => {
+      console.log(ps.enteredValue, typeof ps.enteredValue);
+      ps.enteredValue = ps.enteredValue.slice(0, ps.enteredValue.length - 1);
       return ps;
     });
   }
   calculate() {
     this.setState((ps) => {
       if (ps.lastOperator === '/') {
-        ps.result = ps.calculation = parseInt(ps.previousValue) / parseInt(ps.enteredValue);
+        ps.result = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
       }
       if (ps.lastOperator === 'X') {
-        ps.result = ps.calculation = parseInt(ps.previousValue) * parseInt(ps.enteredValue);
+        ps.result = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
       }
       if (ps.lastOperator === '-') {
-        ps.result = ps.calculation = parseInt(ps.previousValue) - parseInt(ps.enteredValue);
+        ps.result = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
       }
       if (ps.lastOperator === '+') {
-        ps.result = ps.calculation = parseInt(ps.previousValue) + parseInt(ps.enteredValue);
+        ps.result = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
       }
-      ps.enteredValue = '';
+      if (!(ps.result % 1)) ps.result = Math.floor(ps.result);
+      ps.calculation = ps.enteredValue = `${ps.result}`;
+      ps.previousValue = '';
       return ps;
     });
   }
@@ -94,6 +105,11 @@ class Calculator extends Component {
           <div className={styles.allClear}>
             <CalculatorButton action={this.allClear} keyCodeTrigger={8}>
               AC
+            </CalculatorButton>
+          </div>
+          <div className={styles.backSpace}>
+            <CalculatorButton action={this.erase} keyCodeTrigger={8}>
+              {'<X>'}
             </CalculatorButton>
           </div>
           <div className={styles.divide}>
