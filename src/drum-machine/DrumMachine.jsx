@@ -125,14 +125,6 @@ export class DrumPad extends React.Component {
     sound.play();
     this.props.showPressedTrack(this.props.id);
   }
-  componentDidMount() {
-    const playOnKeyStroke = ({ key }) => {
-      if (key.toUpperCase() === this.props.keyTrigger) {
-        this.play();
-      }
-    };
-    window.addEventListener('keypress', playOnKeyStroke);
-  }
   componentDidUpdate() {
     // this fires when props.volume (any prop) changes
     this.clip.current.volume = this.props.volume;
@@ -140,7 +132,7 @@ export class DrumPad extends React.Component {
   render() {
     return (
       <>
-        <PadButton action={this.play} disabled={this.props.off}>
+        <PadButton action={this.play} disabled={this.props.off} keyTrigger={this.props.keyTrigger}>
           {this.props.keyTrigger}
           <br />
           {this.props.id}
