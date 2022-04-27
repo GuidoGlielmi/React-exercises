@@ -1,0 +1,31 @@
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 40px;
+}
+.content {
+  width: 40%;
+  padding: 3%;
+  border-radius: 3px;
+}
+.quoteContainer {
+  display: flex;
+  flex-direction: column;
+}
+.quote {
+  position: relative;
+}
+.quoteText {
+  text-align: center;
+  font-size: xx-large;
+  margin: 0;
+}
+.author {
+  align-self: flex-end;
+}
+.quoteButtons {
+  display: flex;
+  justify-content: space-between;
+}

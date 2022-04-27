@@ -1,0 +1,23 @@
+.appear {
+  opacity: 0;
+  transform: scale(0.1);
+}
+.appearActive {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 700ms ease, transform 1400ms ease;
+}
+.enter {
+  opacity: 0;
+}
+.enterActive {
+  opacity: 1;
+  transition: opacity 700ms;
+}
+.exit {
+  opacity: 1;
+}
+.exitActive {
+  opacity: 0;
+  transition: opacity 700ms;
+}
