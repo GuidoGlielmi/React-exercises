@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import buttonPressStyles from '../transitions/button-press/button-press.module.css';
+import buttonPressStyles from '../../transitions/button-press/button-press.module.css';
 import styles from './PadButton.module.css';
 export default class PadButton extends Component {
   constructor(props) {
