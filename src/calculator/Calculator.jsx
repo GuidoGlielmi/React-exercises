@@ -17,12 +17,14 @@ class Calculator extends Component {
     this.allClear = this.allClear.bind(this);
     this.calculate = this.calculate.bind(this);
     this.erase = this.erase.bind(this);
-    // this.eval("2+5*3") parses an expression (would be useful for a modern calculator, not the old one that is represented by this app)
+    // this.eval("2+5*3") parses an expression (would be useful for a ecuation-logic calculator, not the immediate-execution-logic that this app is)
   }
   appendToEnteredValue(value) {
     this.setState((ps) => {
       if (ps.operatorEntered) ps.enteredValue = '';
       ps.operatorEntered = false;
+      if (ps.enteredValue[0] === '0' && value === '0') return ps; // **for checking**
+      if (ps.enteredValue[ps.enteredValue.length - 1] === '.' && value === '.') return ps; // **for checking**
       ps.enteredValue += value;
       ps.calculation += value;
       return ps;
@@ -107,11 +109,13 @@ class Calculator extends Component {
     return (
       <div className={styles.calculator}>
         <div className={styles.screen}>
-          <div className={styles.calculation}>{this.state.calculation}</div>
+          <div className={styles.calculation} id='display'>
+            {this.state.calculation}
+          </div>
           <div className={styles.enteredValue}>{this.state.enteredValue}</div>
         </div>
         <div className={styles.keyboard}>
-          <div className={styles.allClear}>
+          <div className={styles.allClear} id='clear'>
             <CalculatorButton action={this.allClear} keyCodeTrigger={8}>
               AC
             </CalculatorButton>
@@ -121,17 +125,17 @@ class Calculator extends Component {
               {'<X>'}
             </CalculatorButton>
           </div>
-          <div className={styles.divide}>
+          <div className={styles.divide} id='divide'>
             <CalculatorButton action={this.enterOperator} keyTrigger='/' keyCodeTrigger={111}>
               /
             </CalculatorButton>
           </div>
-          <div className={styles.multiply}>
+          <div className={styles.multiply} id='mmultiply'>
             <CalculatorButton action={this.enterOperator} keyTrigger='X' keyCodeTrigger={106}>
               X
             </CalculatorButton>
           </div>
-          <div className={styles.seven}>
+          <div className={styles.seven} id='seven'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={103}
@@ -140,7 +144,7 @@ class Calculator extends Component {
               7
             </CalculatorButton>
           </div>
-          <div className={styles.eight}>
+          <div className={styles.eight} id='eight'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={104}
@@ -149,7 +153,7 @@ class Calculator extends Component {
               8
             </CalculatorButton>
           </div>
-          <div className={styles.nine}>
+          <div className={styles.nine} id='nine'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={105}
@@ -158,12 +162,12 @@ class Calculator extends Component {
               9
             </CalculatorButton>
           </div>
-          <div className={styles.minus}>
+          <div className={styles.minus} id='substract'>
             <CalculatorButton action={this.enterOperator} keyTrigger='-' keyCodeTrigger={109}>
               -
             </CalculatorButton>
           </div>
-          <div className={styles.four}>
+          <div className={styles.four} id='four'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={100}
@@ -172,7 +176,7 @@ class Calculator extends Component {
               4
             </CalculatorButton>
           </div>
-          <div className={styles.five}>
+          <div className={styles.five} id='five'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={101}
@@ -181,7 +185,7 @@ class Calculator extends Component {
               5
             </CalculatorButton>
           </div>
-          <div className={styles.six}>
+          <div className={styles.six} id='six'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyCodeTrigger={102}
@@ -190,32 +194,32 @@ class Calculator extends Component {
               6
             </CalculatorButton>
           </div>
-          <div className={styles.plus}>
+          <div className={styles.plus} id='add'>
             <CalculatorButton action={this.enterOperator} keyTrigger='+' keyCodeTrigger={107}>
               +
             </CalculatorButton>
           </div>
-          <div className={styles.one}>
+          <div className={styles.one} id='one'>
             <CalculatorButton action={this.appendToEnteredValue} keyCodeTrigger={97} keyTrigger='1'>
               1
             </CalculatorButton>
           </div>
-          <div className={styles.two}>
+          <div className={styles.two} id='two'>
             <CalculatorButton action={this.appendToEnteredValue} keyCodeTrigger={98} keyTrigger='2'>
               2
             </CalculatorButton>
           </div>
-          <div className={styles.three}>
+          <div className={styles.three} id='three'>
             <CalculatorButton action={this.appendToEnteredValue} keyCodeTrigger={99} keyTrigger='3'>
               3
             </CalculatorButton>
           </div>
-          <div className={styles.cero}>
+          <div className={styles.cero} id='zero'>
             <CalculatorButton action={this.appendToEnteredValue} keyCodeTrigger={96} keyTrigger='0'>
               0
             </CalculatorButton>
           </div>
-          <div className={styles.dot}>
+          <div className={styles.dot} id='decimal'>
             <CalculatorButton
               action={this.appendToEnteredValue}
               keyTrigger='.'
@@ -224,7 +228,7 @@ class Calculator extends Component {
               .
             </CalculatorButton>
           </div>
-          <div className={styles.equal}>
+          <div className={styles.equal} id='equals'>
             <CalculatorButton action={this.calculate} keyCodeTrigger={13}>
               =
             </CalculatorButton>
