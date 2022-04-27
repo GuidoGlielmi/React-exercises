@@ -117,15 +117,13 @@ export class DrumPad extends React.Component {
     this.play = this.play.bind(this);
   }
   play() {
-    if (!this.props.off) {
-      const sound = this.clip.current;
-      if (!sound.ended) {
-        sound.pause();
-        sound.currentTime = 0;
-      }
-      sound.play();
-      this.props.showPressedTrack(this.props.id);
+    const sound = this.clip.current;
+    if (!sound.ended) {
+      sound.pause();
+      sound.currentTime = 0;
     }
+    sound.play();
+    this.props.showPressedTrack(this.props.id);
   }
   componentDidMount() {
     const playOnKeyStroke = ({ key }) => {
