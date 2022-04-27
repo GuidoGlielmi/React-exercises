@@ -10,13 +10,15 @@ export default class PadButton extends Component {
     this.unpress = this.unpress.bind(this);
   }
   componentDidMount() {
-    const actionOnKeyStroke = ({ key }) => {
-      if (key.toUpperCase() === this.props.keyTrigger) {
-        this.press();
-        this.unpress();
-      }
+    const actionOnKeyStroke = (e) => {
+      if (e.repeat) return;
+      console.log(this.props.id);
+      if (e.key === this.props.keyTrigger) this.press();
     };
-    this.props.keyTrigger && window.addEventListener('keypress', actionOnKeyStroke);
+    if (this.props.keyTrigger) {
+      window.addEventListener('keydown', actionOnKeyStroke);
+      window.addEventListener('keyup', this.unpress);
+    }
   }
   press() {
     this.setState({ pressed: true });

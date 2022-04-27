@@ -6,55 +6,55 @@ import switchSideToSide from '../shared/transitions/switch-side-to-side/switchSi
 const drums = [
   {
     keyCode: 81,
-    keyTrigger: 'Q',
+    keyTrigger: 'q',
     id: 'Snare',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/share-drum.mp3',
   },
   {
     keyCode: 87,
-    keyTrigger: 'W',
+    keyTrigger: 'w',
     id: 'Side-stick',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/share-stick.mp3',
   },
   {
     keyCode: 69,
-    keyTrigger: 'E',
+    keyTrigger: 'e',
     id: 'Hi-hat',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/hihat.mp3',
   },
   {
     keyCode: 65,
-    keyTrigger: 'A',
+    keyTrigger: 'a',
     id: 'Open-hi-hat',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/hihat-open.mp3',
   },
   {
     keyCode: 83,
-    keyTrigger: 'S',
+    keyTrigger: 's',
     id: 'Floor-tom',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/floor-tom.mp3',
   },
   {
     keyCode: 68,
-    keyTrigger: 'D',
+    keyTrigger: 'd',
     id: 'Tom-1',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/tom1.mp3',
   },
   {
     keyCode: 90,
-    keyTrigger: 'Z',
+    keyTrigger: 'z',
     id: 'Tom-2',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/tom2.mp3',
   },
   {
     keyCode: 88,
-    keyTrigger: 'X',
+    keyTrigger: 'x',
     id: 'Crash',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/crash.mp3',
   },
   {
     keyCode: 67,
-    keyTrigger: 'C',
+    keyTrigger: 'c',
     id: 'Ride',
     url: 'https://www.musicca.com/files/scripts/drumkit/sound/ride.mp3',
   },
@@ -63,49 +63,49 @@ const drums = [
 const bass = [
   {
     keyCode: 81,
-    keyTrigger: 'Q',
+    keyTrigger: 'q',
     id: 'e1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/e0.mp3',
   },
   {
     keyCode: 90,
-    keyTrigger: 'W',
+    keyTrigger: 'w',
     id: 'f1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/e2.mp3',
   },
   {
     keyCode: 88,
-    keyTrigger: 'E',
+    keyTrigger: 'e',
     id: 'f#1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/e3.mp3',
   },
   {
     keyCode: 65,
-    keyTrigger: 'A',
+    keyTrigger: 'a',
     id: 'g#1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/e5.mp3',
   },
   {
     keyCode: 87,
-    keyTrigger: 'S',
+    keyTrigger: 's',
     id: 'b1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/a3.mp3',
   },
   {
     keyCode: 83,
-    keyTrigger: 'D',
+    keyTrigger: 'd',
     id: 'c1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/a4.mp3',
   },
   {
     keyCode: 68,
-    keyTrigger: 'Z',
+    keyTrigger: 'z',
     id: 'c#1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/a5.mp3',
   },
   {
     keyCode: 69,
-    keyTrigger: 'X',
+    keyTrigger: 'x',
     id: 'd1',
     url: 'https://www.musicca.com/lydfiler/bass-guitar/d1.mp3',
   },
@@ -133,7 +133,7 @@ export class DrumPad extends React.Component {
     return (
       <>
         <PadButton action={this.play} disabled={this.props.off} keyTrigger={this.props.keyTrigger}>
-          {this.props.keyTrigger}
+          {this.props.keyTrigger.toUpperCase()}
           <br />
           {this.props.id}
         </PadButton>
