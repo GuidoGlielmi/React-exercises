@@ -23,8 +23,8 @@ class Calculator extends Component {
     this.setState((ps) => {
       if (ps.operatorEntered) ps.enteredValue = '';
       ps.operatorEntered = false;
-      if (ps.enteredValue[0] === '0' && value === '0') return ps; // **for checking**
-      if (ps.enteredValue[ps.enteredValue.length - 1] === '.' && value === '.') return ps; // **for checking**
+      if (ps.enteredValue[0] === '0' && value === '0') return ps;
+      if (ps.enteredValue.includes('.') && value === '.') return ps;
       ps.enteredValue += value;
       ps.calculation += value;
       return ps;
@@ -34,6 +34,12 @@ class Calculator extends Component {
     this.setState((ps) => {
       if (!ps.previousValue && !ps.enteredValue) return ps;
       if (ps.operatorEntered) {
+        if (value === '-') {
+          ps.enteredValue = value;
+          ps.calculation += value;
+          ps.operatorEntered = false;
+          return ps;
+        }
         ps.lastOperator = ps.enteredValue = value;
         ps.calculation = ps.calculation.slice(0, -3) + ` ${value} `;
         return ps;
