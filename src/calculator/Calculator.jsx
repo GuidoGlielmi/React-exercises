@@ -10,7 +10,6 @@ class Calculator extends Component {
       previousValue: '',
       lastOperator: '',
       operatorEntered: false,
-      result: '',
       objeto: ['asd'],
     };
     this.appendToEnteredValue = this.appendToEnteredValue.bind(this);
@@ -30,57 +29,67 @@ class Calculator extends Component {
   }
   enterOperator(value) {
     this.setState((ps) => {
-      if (ps.operatorEntered) return ps;
-      ps.lastOperator = value;
+      if (!ps.previousValue && !ps.enteredValue) return ps;
+      if (ps.operatorEntered) {
+        ps.lastOperator = ps.enteredValue = value;
+        ps.calculation = ps.calculation.slice(0, ps.calculation.length - 2) + ` ${value} `;
+        return ps;
+      }
       ps.operatorEntered = true;
       if (!ps.previousValue) {
         ps.previousValue = ps.enteredValue;
         ps.calculation += ` ${value} `;
-      } else {
-        if (value === '/') {
-          ps.result = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
-        }
-        if (value === 'X') {
-          ps.result = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
-        }
-        if (value === '-') {
-          ps.result = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
-        }
-        if (value === '+') {
-          ps.result = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
-        }
-        if (!(ps.result % 1)) ps.result = Math.floor(ps.result);
-        ps.calculation = `${ps.result} ${value} `;
-        ps.previousValue = `${ps.result}`;
         ps.enteredValue = value;
+      } else {
+        if (ps.lastOperator === '/') {
+          ps.previousValue = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === 'X') {
+          ps.previousValue = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === '-') {
+          ps.previousValue = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === '+') {
+          ps.previousValue = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
+        }
+        if (!(ps.previousValue % 1)) ps.previousValue = Math.floor(ps.previousValue);
+        // previousValue doesn't need to be string because won't be shown
+        ps.calculation = `${ps.previousValue} ${value} `;
+        ps.enteredValue = value; // only for display
       }
+      ps.lastOperator = value;
       return ps;
     });
   }
   erase() {
     this.setState((ps) => {
-      console.log(ps.enteredValue, typeof ps.enteredValue);
-      ps.enteredValue = ps.enteredValue.slice(0, ps.enteredValue.length - 1);
+      if (ps.enteredValue.length) {
+        ps.enteredValue = ps.enteredValue.slice(0, ps.enteredValue.length - 1);
+        ps.calculation = ps.calculation.slice(0, ps.calculation.length - 1);
+      }
       return ps;
     });
   }
   calculate() {
     this.setState((ps) => {
-      if (ps.lastOperator === '/') {
-        ps.result = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
+      if (ps.enteredValue && ps.previousValue) {
+        if (ps.lastOperator === '/') {
+          ps.previousValue = parseFloat(ps.previousValue) / parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === 'X') {
+          ps.previousValue = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === '-') {
+          ps.previousValue = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
+        }
+        if (ps.lastOperator === '+') {
+          ps.previousValue = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
+        }
+        if (!(ps.previousValue % 1)) ps.previousValue = Math.floor(ps.previousValue);
+        ps.calculation = ps.enteredValue = `${ps.previousValue}`;
+        ps.previousValue = '';
       }
-      if (ps.lastOperator === 'X') {
-        ps.result = parseFloat(ps.previousValue) * parseFloat(ps.enteredValue);
-      }
-      if (ps.lastOperator === '-') {
-        ps.result = parseFloat(ps.previousValue) - parseFloat(ps.enteredValue);
-      }
-      if (ps.lastOperator === '+') {
-        ps.result = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
-      }
-      if (!(ps.result % 1)) ps.result = Math.floor(ps.result);
-      ps.calculation = ps.enteredValue = `${ps.result}`;
-      ps.previousValue = '';
       return ps;
     });
   }
@@ -88,10 +97,9 @@ class Calculator extends Component {
     this.setState({
       calculation: '',
       enteredValue: '',
+      previousValue: '',
+      lastOperator: '',
       operatorEntered: false,
-      isFirstOperator: true,
-      operandPair: [],
-      result: '',
     });
   }
   render() {
@@ -207,7 +215,11 @@ class Calculator extends Component {
             </CalculatorButton>
           </div>
           <div className={styles.dot}>
-            <CalculatorButton action={this.appendToEnteredValue} keyCodeTrigger={110}>
+            <CalculatorButton
+              action={this.appendToEnteredValue}
+              keyTrigger='.'
+              keyCodeTrigger={110}
+            >
               .
             </CalculatorButton>
           </div>
