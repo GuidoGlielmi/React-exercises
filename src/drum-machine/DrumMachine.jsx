@@ -1,8 +1,8 @@
 import React from 'react';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import styles from './DrumMachine.module.css';
+import PadButton from '../shared/button/PadButton';
 import switchSideToSide from '../shared/transitions/switch-side-to-side/switchSideToSide.module.css';
-import buttonPressStyles from '../shared/transitions/button-press/button-press.module.css';
 const drums = [
   {
     keyCode: 81,
@@ -113,25 +113,24 @@ const bass = [
 export class DrumPad extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { pressed: false };
     this.clip = React.createRef();
     this.play = this.play.bind(this);
   }
   play() {
-    const sound = this.clip.current;
-    if (!sound.ended) {
-      sound.pause();
-      sound.currentTime = 0;
+    if (!this.props.off) {
+      const sound = this.clip.current;
+      if (!sound.ended) {
+        sound.pause();
+        sound.currentTime = 0;
+      }
+      sound.play();
+      this.props.showPressedTrack(this.props.id);
     }
-    sound.play();
-    this.setState({ pressed: true });
-    this.props.showPressedTrack(this.props.id);
   }
   componentDidMount() {
     const playOnKeyStroke = ({ key }) => {
       if (key.toUpperCase() === this.props.keyTrigger) {
         this.play();
-        this.setState({ pressed: false });
       }
     };
     window.addEventListener('keypress', playOnKeyStroke);
@@ -143,22 +142,11 @@ export class DrumPad extends React.Component {
   render() {
     return (
       <>
-        <CSSTransition
-          in={this.state.pressed} //begins in false
-          timeout={100}
-          classNames={{ ...buttonPressStyles }}
-        >
-          <button
-            className={styles.pad}
-            onPointerDown={this.play}
-            onPointerUp={() => this.setState({ pressed: false })}
-            disabled={this.props.off}
-          >
-            {this.props.keyTrigger}
-            <br />
-            {this.props.id}
-          </button>
-        </CSSTransition>
+        <PadButton action={this.play} disabled={this.props.off}>
+          {this.props.keyTrigger}
+          <br />
+          {this.props.id}
+        </PadButton>
         <audio ref={this.clip} src={this.props.src} className='clip' id={this.props.keyTrigger} />
       </>
     );

@@ -1,0 +1,7 @@
+.pad {
+  width: max(4vw, 4vh);
+  height: max(4vw, 4vh);
+  margin: max(0.5vw, 0.5vh);
+  padding: 0;
+  box-shadow: 2px 1px 2px 0px black;
+}
