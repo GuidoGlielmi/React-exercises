@@ -21,7 +21,7 @@ export default class CalculatorButton extends Component {
   }
   press() {
     this.setState({ pressed: true });
-    this.props.action();
+    this.props.action(this.props.keyTrigger || undefined);
   }
   unpress() {
     this.setState({ pressed: false });
