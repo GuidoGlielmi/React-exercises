@@ -17,6 +17,7 @@ class Calculator extends Component {
     this.allClear = this.allClear.bind(this);
     this.calculate = this.calculate.bind(this);
     this.erase = this.erase.bind(this);
+    // this.eval("2+5*3") parses an expression (would be useful for a modern calculator, not the old one that is represented by this app)
   }
   appendToEnteredValue(value) {
     this.setState((ps) => {
@@ -32,7 +33,7 @@ class Calculator extends Component {
       if (!ps.previousValue && !ps.enteredValue) return ps;
       if (ps.operatorEntered) {
         ps.lastOperator = ps.enteredValue = value;
-        ps.calculation = ps.calculation.slice(0, ps.calculation.length - 2) + ` ${value} `;
+        ps.calculation = ps.calculation.slice(0, -3) + ` ${value} `;
         return ps;
       }
       ps.operatorEntered = true;
@@ -65,8 +66,8 @@ class Calculator extends Component {
   erase() {
     this.setState((ps) => {
       if (ps.enteredValue.length) {
-        ps.enteredValue = ps.enteredValue.slice(0, ps.enteredValue.length - 1);
-        ps.calculation = ps.calculation.slice(0, ps.calculation.length - 1);
+        ps.enteredValue = ps.enteredValue.slice(0, -1);
+        ps.calculation = ps.calculation.slice(0, -1);
       }
       return ps;
     });
