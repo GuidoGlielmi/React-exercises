@@ -1,0 +1,88 @@
+.calculator {
+  margin: 10vh;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+}
+.calculation,
+.enteredValue {
+  align-self: flex-end;
+  line-height: 5vh;
+}
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 5vw);
+  grid-template-rows: repeat(5, 5vw);
+}
+
+.allClear {
+  grid-column: 1 / 3;
+  /* grid-row: 1; // default */
+  background: red;
+}
+.divide {
+  grid-column: 3;
+}
+.multiply {
+  grid-column: 4;
+}
+
+.seven {
+  grid-row: 2;
+}
+.eight {
+  grid-column: 2;
+  grid-row: 2;
+}
+.nine {
+  grid-column: 3;
+  grid-row: 2;
+}
+.minus {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.four {
+  grid-row: 3;
+}
+.five {
+  grid-column: 2;
+  grid-row: 3;
+}
+.six {
+  grid-column: 3;
+  grid-row: 3;
+}
+.plus {
+  grid-column: 4;
+  grid-row: 3;
+}
+
+.one {
+  grid-row: 4;
+}
+.two {
+  grid-column: 2;
+  grid-row: 4;
+}
+.three {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+.cero {
+  grid-row: 5;
+  grid-column: 1 / 3;
+}
+.dot {
+  grid-column: 3;
+  grid-row: 5;
+}
+
+.equal {
+  grid-column: 4;
+  grid-row: 4 / 6;
+  background: blue;
+}
