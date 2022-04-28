@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Random.module.css';
+import RandomAsFunction from './RandomAsFunction';
 
 class Random extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Random extends Component {
           <div className={styles.child}></div>
         </div>
         <button onClick={() => this.setState((ps) => ({ active: !ps.active }))}>HEIGHT</button>
+        <RandomAsFunction />
       </div>
     );
   }
