@@ -4,27 +4,39 @@ import { DrumMachine } from './drum-machine/DrumMachine';
 import { RandomQuoteGenerator } from './random-quote-generator/RandomQuoteGenerator';
 import { Game } from './tic-tac-toe/Game';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import NavBar from './nav-bar/style-1/NavBar';
+import Navbar from './nav-bar/style-1/NavBar';
 import Navbar2 from './nav-bar/style-2/NavBar2';
 import Random from './random/Random';
-import { useState } from 'react';
+import React from 'react';
+import RandomQuotes from 'contexts/RandomQuotes';
+// creating context in App doesn't work
+//(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
-  const [selectedNavbar, setSelectedNavbar] = useState(true);
-
   return (
     <BrowserRouter>
-      {selectedNavbar ? <NavBar /> : <Navbar2 />}
-      <button onClick={() => setSelectedNavbar((ps) => !ps)}>Change Navbar Transition style</button>
       <Routes>
-        <Route path='/tic-tac-toe' element={<Game />}></Route>
-        <Route path='/random-quote-generator' element={<RandomQuoteGenerator />}></Route>
-        <Route path='/drum-machine' element={<DrumMachine />}></Route>
-        <Route path='/calculator' element={<Calculator />}></Route>
-        <Route path='/random' element={<Random />}></Route>
+        <Route path='/' element={<Navbar />}>
+          {/* First two games will share Navbar 1 */}
+          <Route path='/tic-tac-toe' element={<Game />} />
+          {/* routes inside routes will nest the endpoint */}
+          <Route
+            path='/random-quote-generator'
+            element={
+              <RandomQuotes>
+                <RandomQuoteGenerator />
+              </RandomQuotes>
+            }
+          />
+        </Route>
+        <Route path='/' element={<Navbar2 />}>
+          {/* First two games will share Navbar 2 */}
+          <Route path='/drum-machine' element={<DrumMachine />} />
+          <Route path='/calculator' element={<Calculator />} />
+          <Route path='/random' element={<Random />} />
+        </Route>
         <Route path='*' element={<Navigate to='/tic-tac-toe' />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;

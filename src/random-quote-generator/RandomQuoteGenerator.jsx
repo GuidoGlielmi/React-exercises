@@ -2,32 +2,29 @@ import React from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import styles from './RandomQuoteGenerator.module.css';
 import switchFadeOutInStyles from '../shared/transitions/switch-fade-out-in/switchFadeOutIn.module.css';
+import { QuotesContext } from '../contexts/RandomQuotes';
 export class RandomQuoteGenerator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quotes: [],
+      quotes: this.context,
       selectedQuote: { quote: '', author: '' },
       quoteTransition: true,
       currentBackground: this.getRandomColor(),
     };
     this.newQuote = this.newQuote.bind(this);
   }
-  componentDidMount() {
-    const getQuotes = async () => {
-      const rawQuotes = await fetch(
-        'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json',
-      );
-      const quotes = await rawQuotes.json();
-      this.setState({
-        quotes: quotes.quotes,
-        selectedQuote: quotes.quotes[Math.floor(Math.random() * quotes.quotes.length)],
-      });
-    };
-    getQuotes();
-  }
   getRandomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+  componentDidUpdate() {
+    this.setState((ps) => {
+      if (!ps.quotes) {
+        ps.quotes = this.context;
+        ps.selectedQuote = this.context[0];
+        return ps;
+      }
+    });
   }
   newQuote() {
     this.setState((ps) => {
@@ -110,6 +107,8 @@ export class RandomQuoteGenerator extends React.Component {
     );
   }
 }
+RandomQuoteGenerator.contextType = QuotesContext;
+
 /* 
 import React from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';

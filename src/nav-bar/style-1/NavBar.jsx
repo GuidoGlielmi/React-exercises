@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Component } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import styles from './NavBar.module.css';
 import leftUnfoldStyles from '../../shared/transitions/left-unfold/left-unfold.module.css';
+import { RoutesContext } from '../../contexts/Routes';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -19,31 +20,19 @@ export default class NavBar extends Component {
           <nav className={styles.nav}>
             <div className={styles.linkListContainer}>
               <ul className={styles.linkList}>
-                <li className={styles.linkElement}>
-                  <Link className={styles.link} to='/tic-tac-toe'>
-                    Tic-Tac-Toe
-                  </Link>
-                </li>
-                <li className={styles.linkElement}>
-                  <Link className={styles.link} to='/random-quote-generator'>
-                    Random-Quote-Machine
-                  </Link>
-                </li>
-                <li className={styles.linkElement}>
-                  <Link className={styles.link} to='/drum-machine'>
-                    Drum-Machine
-                  </Link>
-                </li>
-                <li className={styles.linkElement}>
-                  <Link className={styles.link} to='/calculator'>
-                    Calculator
-                  </Link>
-                </li>
-                <li className={styles.linkElement}>
-                  <Link className={styles.link} to='/random'>
-                    random
-                  </Link>
-                </li>
+                {this.context.map((rc, i) => {
+                  return (
+                    <li key={i} className={styles.linkElement}>
+                      <NavLink
+                        style={({ isActive }) => ({ color: isActive ? 'red' : '' })}
+                        className={styles.link}
+                        to={rc.path}
+                      >
+                        {rc.linkName}
+                      </NavLink>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <button
@@ -54,7 +43,9 @@ export default class NavBar extends Component {
             </button>
           </nav>
         </CSSTransition>
+        <Outlet />
       </>
     );
   }
 }
+NavBar.contextType = RoutesContext;
