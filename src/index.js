@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Routes from 'contexts/Routes';
+import RoutesContext from 'contexts/RoutesContext';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,9 +13,9 @@ root.render(
 );*/
 
 ReactDOM.render(
-  <Routes>
+  <RoutesContext>
     <App />
-  </Routes>,
+  </RoutesContext>,
   document.getElementById('root'),
 );
 // If you want to start measuring performance in your app, pass a function

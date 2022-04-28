@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import styles from './NavBar.module.css';
 import leftUnfoldStyles from '../../shared/transitions/left-unfold/left-unfold.module.css';
-import { RoutesContext } from '../../contexts/Routes';
+import { routesContext } from '../../contexts/RoutesContext';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -48,4 +48,4 @@ export default class NavBar extends Component {
     );
   }
 }
-NavBar.contextType = RoutesContext;
+NavBar.contextType = routesContext;

@@ -3,12 +3,12 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import styles from './RandomQuoteGenerator.module.css';
 import switchFadeOutInStyles from '../shared/transitions/switch-fade-out-in/switchFadeOutIn.module.css';
 import { QuotesContext } from '../contexts/RandomQuotes';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 export class RandomQuoteGenerator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quotes: this.context,
+      quotes: [],
       selectedQuote: { quote: '', author: '' },
       quoteTransition: true,
       currentBackground: this.getRandomColor(),
@@ -20,7 +20,7 @@ export class RandomQuoteGenerator extends React.Component {
   }
   componentDidUpdate() {
     this.setState((ps) => {
-      if (!ps.quotes) {
+      if (!ps.quotes[0]) {
         ps.quotes = this.context.quotes;
         const randomIndex = Math.floor(Math.random() * ps.quotes.length);
         ps.selectedQuote = this.context.quotes[randomIndex];
@@ -103,11 +103,13 @@ export class RandomQuoteGenerator extends React.Component {
                   </button>
                 </div>
                 <button onClick={this.newQuote}>New quote</button>
+                <Link to='show-index'>Show index</Link>
+                {/* Without '/' at the begging, it appends the string to the current path */}
               </div>
             </div>
           </CSSTransition>
         </SwitchTransition>
-        <Outlet /> {/*this allows to aggregate the child into the parent route*/}
+        <Outlet /> {/*this allows to aggregate the child into the parent route component*/}
       </div>
     );
   }

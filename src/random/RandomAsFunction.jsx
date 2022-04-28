@@ -8,7 +8,7 @@ export default function RandomAsFunction() {
       <p>{first.first}</p>
       <p>{second}</p>
       <button onClick={() => setFirst((ps) => ps)}>
-        FIRST: TRY RE-RENDER THE FIRST STATE BY SETTING A STATE TO THE SAME MEMORY REFERENCE
+        FIRST: TRY RE-RENDERING THE FIRST STATE BY SETTING IT TO THE SAME MEMORY REFERENCE
       </button>
       <button
         onClick={() =>
@@ -18,7 +18,8 @@ export default function RandomAsFunction() {
           })
         }
       >
-        SECOND: TRY RE-RENDER THE FIRST STATE BY MODIFYING A PROPERTY OF A STATE
+        SECOND: TRY RE-RENDERING THE FIRST STATE BY MODIFYING ONE OF ITS PROPERTIES (IT IS AN
+        OBJECT)
       </button>
       <button onClick={() => setSecond('not the second')}>
         THIRD: NOW CHANGE THE MEMORY REFERENCE OF THE SECOND (ANY) STATE TO SEE HOW THE PREVIOUS

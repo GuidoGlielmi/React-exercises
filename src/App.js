@@ -14,14 +14,16 @@ import Asd from 'random-quote-generator/Asd';
 //(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
   return (
+    // BrowserRouter and Routes use contexts
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navbar />}>
+          <Route path='/' element={<Navigate to='/tic-tac-toe ' />} />
           {/* First two games will share Navbar 1 */}
-          <Route path='/tic-tac-toe' element={<Game />} />
+          <Route path='tic-tac-toe' element={<Game />} />
           {/* routes inside routes will nest the endpoint */}
           <Route
-            path='/random-quote-generator'
+            path='random-quote-generator'
             element={
               // every child route has access to RandomQuotesContext
               <RandomQuotesContext>
@@ -29,16 +31,17 @@ function App() {
               </RandomQuotesContext>
             }
           >
-            <Route path='/random-quote-generator/asd' element={<Asd />} />
+            <Route path='show-index' element={<Asd />} />
+            {/* <Route path='random-quote-generator/asd' element={<Asd />} /> */}
           </Route>
         </Route>
         <Route path='/' element={<Navbar2 />}>
           {/* First two games will share Navbar 2 */}
-          <Route path='/drum-machine' element={<DrumMachine />} />
-          <Route path='/calculator' element={<Calculator />} />
-          <Route path='/random' element={<Random />} />
+          <Route path='drum-machine' element={<DrumMachine />} />
+          <Route path='calculator' element={<Calculator />} />
+          <Route path='random' element={<Random />} />
         </Route>
-        <Route path='*' element={<Navigate to='/tic-tac-toe' />} />
+        {/* <Route path='*' element={<Navigate to='/tic-tac-toe' />} /> */}
       </Routes>
     </BrowserRouter>
   );
