@@ -1,0 +1,14 @@
+.enterActive {
+  width: 15vw;
+  transition: width 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.enterDone {
+  width: 15vw;
+}
+.exit {
+  width: 15vw;
+}
+.exitActive {
+  width: 0;
+  transition: width 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,6 +1,5 @@
 .enterActive {
   transform: translateX(0);
-  transform: opacity(1);
   transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .enterDone {
@@ -11,6 +10,5 @@
 }
 .exitActive {
   transform: translateX(-15vw);
-  transform: opacity(0);
   transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
 }
