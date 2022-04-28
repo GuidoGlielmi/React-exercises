@@ -8,7 +8,8 @@ import Navbar from './nav-bar/style-1/NavBar';
 import Navbar2 from './nav-bar/style-2/NavBar2';
 import Random from './random/Random';
 import React from 'react';
-import RandomQuotes from 'contexts/RandomQuotes';
+import RandomQuotesContext from 'contexts/RandomQuotes';
+import Asd from 'random-quote-generator/Asd';
 // creating context in App doesn't work
 //(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
@@ -22,11 +23,14 @@ function App() {
           <Route
             path='/random-quote-generator'
             element={
-              <RandomQuotes>
+              // every child route has access to RandomQuotesContext
+              <RandomQuotesContext>
                 <RandomQuoteGenerator />
-              </RandomQuotes>
+              </RandomQuotesContext>
             }
-          />
+          >
+            <Route path='/random-quote-generator/asd' element={<Asd />} />
+          </Route>
         </Route>
         <Route path='/' element={<Navbar2 />}>
           {/* First two games will share Navbar 2 */}

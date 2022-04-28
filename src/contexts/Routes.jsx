@@ -1,5 +1,5 @@
 import React from 'react';
-export const RoutesContext = React.createContext('');
+export const RoutesContext = React.createContext([]);
 const routes = [
   { linkName: 'Tic-Tac-Toe', path: '/tic-tac-toe' },
   { linkName: 'Random-Quote-Generator', path: '/random-quote-generator' },

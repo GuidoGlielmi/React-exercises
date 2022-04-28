@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 export default function RandomAsFunction() {
   const [first, setFirst] = useState({ first: 'first' });
   const [second, setSecond] = useState('second');
-  console.log('rendered');
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <p>{first.first}</p>
