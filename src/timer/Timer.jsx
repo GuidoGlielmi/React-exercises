@@ -5,10 +5,10 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionTime: new Date(new Date().getTime() + 1500000) - new Date(),
-      currentSessionTime: new Date(new Date().getTime() + 1500000) - new Date(),
-      breakTime: new Date(new Date().getTime() + 300000) - new Date(),
-      currentBreakTime: new Date(new Date().getTime() + 300000) - new Date(),
+      sessionTime: new Date(new Date().getTime() + 5000) - new Date(),
+      currentSessionTime: new Date(new Date().getTime() + 5000) - new Date(),
+      breakTime: new Date(new Date().getTime() + 5000) - new Date(),
+      currentBreakTime: new Date(new Date().getTime() + 5000) - new Date(),
       stopped: true,
       isSessionRunning: true,
     };
@@ -56,37 +56,37 @@ export default class Timer extends Component {
   }
   addMinuteToSession() {
     this.setState((ps) => {
-      if (ps.stopped) {
-        ps.currentSessionTime += 60000;
-        ps.sessionTime += 60000;
-      } else ps.currentSessionTime += 60000;
+      if (!ps.isSessionRunning) {
+        ps.currentSessionTime += 1000;
+        ps.sessionTime += 1000;
+      } else ps.currentSessionTime += 1000;
       return ps;
     });
   }
   substractMinuteToSession() {
     this.setState((ps) => {
-      if (ps.stopped) {
-        ps.currentSessionTime -= 60000;
-        ps.sessionTime -= 60000;
-      } else ps.currentSessionTime -= 60000;
+      if (!ps.isSessionRunning) {
+        ps.currentSessionTime -= 1000;
+        ps.sessionTime -= 1000;
+      } else ps.currentSessionTime -= 1000;
       return ps;
     });
   }
   addMinuteToBreak() {
     this.setState((ps) => {
-      if (ps.stopped) {
-        ps.currentBreakTime += 60000;
-        ps.breakTime += 60000;
-      } else ps.currentBreakTime += 60000;
+      if (ps.isSessionRunning) {
+        ps.currentBreakTime += 1000;
+        ps.breakTime += 1000;
+      } else ps.currentBreakTime += 1000;
       return ps;
     });
   }
   substractMinuteToBreak() {
     this.setState((ps) => {
-      if (ps.stopped) {
-        ps.currentBreakTime -= 60000;
-        ps.breakTime -= 60000;
-      } else ps.currentBreakTime -= 60000;
+      if (ps.isSessionRunning) {
+        ps.currentBreakTime -= 1000;
+        ps.breakTime -= 1000;
+      } else ps.currentBreakTime -= 1000;
       return ps;
     });
   }
