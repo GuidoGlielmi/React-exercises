@@ -6,6 +6,7 @@ const routes = [
   { linkName: 'Drum-Machine', path: '/drum-machine' },
   { linkName: 'Calculator', path: '/calculator' },
   { linkName: 'Random', path: '/random' },
+  { linkName: '25+5', path: '/25+5' },
 ];
 export default function RoutesContext({ children }) {
   return <routesContext.Provider value={routes}>{children}</routesContext.Provider>;
