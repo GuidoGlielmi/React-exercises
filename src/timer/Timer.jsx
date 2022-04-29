@@ -5,10 +5,10 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionTime: new Date(new Date().getTime() + 5000) - new Date(),
-      breakTime: new Date(new Date().getTime() + 5000) - new Date(),
-      currentSessionTime: new Date(new Date().getTime() + 5000) - new Date(),
-      currentBreakTime: new Date(new Date().getTime() + 5000) - new Date(),
+      sessionTime: new Date(new Date().getTime() + 1500000) - new Date(),
+      currentSessionTime: new Date(new Date().getTime() + 1500000) - new Date(),
+      breakTime: new Date(new Date().getTime() + 300000) - new Date(),
+      currentBreakTime: new Date(new Date().getTime() + 300000) - new Date(),
       stopped: true,
       isSessionRunning: true,
     };
@@ -30,10 +30,10 @@ export default class Timer extends Component {
           this.sessionSecondPassed();
         }, 1000);
       } else {
-        this.setState({
-          currentSessionTime: new Date(new Date().getTime() + 5000) - new Date(),
+        this.setState((ps) => ({
+          currentSessionTime: ps.sessionTime,
           isSessionRunning: false,
-        });
+        }));
         this.alarm.current.play();
         this.breakSecondPassed();
       }
@@ -46,36 +46,49 @@ export default class Timer extends Component {
         this.breakSecondPassed();
       }, 1000);
     } else {
-      this.setState({
-        currentBreakTime: new Date(new Date().getTime() + 5000) - new Date(),
+      this.setState((ps) => ({
+        currentBreakTime: ps.breakTime,
         isSessionRunning: true,
-      });
+      }));
+      this.alarm.current.play();
       this.sessionSecondPassed();
     }
   }
   addMinuteToSession() {
-    this.setState((ps) => ({
-      currentSessionTime: ps.currentSessionTime + 60000,
-      sessionTime: ps.sessionTime + 60000,
-    }));
+    this.setState((ps) => {
+      if (ps.stopped) {
+        ps.currentSessionTime += 60000;
+        ps.sessionTime += 60000;
+      } else ps.currentSessionTime += 60000;
+      return ps;
+    });
   }
   substractMinuteToSession() {
-    this.setState((ps) => ({
-      currentSessionTime: ps.currentSessionTime - 60000,
-      sessionTime: ps.sessionTime - 60000,
-    }));
+    this.setState((ps) => {
+      if (ps.stopped) {
+        ps.currentSessionTime -= 60000;
+        ps.sessionTime -= 60000;
+      } else ps.currentSessionTime -= 60000;
+      return ps;
+    });
   }
   addMinuteToBreak() {
-    this.setState((ps) => ({
-      currentBreakTime: ps.currentBreakTime + 60000,
-      breakTime: ps.breakTime - 60000,
-    }));
+    this.setState((ps) => {
+      if (ps.stopped) {
+        ps.currentBreakTime += 60000;
+        ps.breakTime += 60000;
+      } else ps.currentBreakTime += 60000;
+      return ps;
+    });
   }
   substractMinuteToBreak() {
-    this.setState((ps) => ({
-      currentBreakTime: ps.currentBreakTime - 60000,
-      breakTime: ps.breakTime - 60000,
-    }));
+    this.setState((ps) => {
+      if (ps.stopped) {
+        ps.currentBreakTime -= 60000;
+        ps.breakTime -= 60000;
+      } else ps.currentBreakTime -= 60000;
+      return ps;
+    });
   }
   toggleStart() {
     this.setState((ps) => ({ stopped: !ps.stopped }));
@@ -126,7 +139,11 @@ export default class Timer extends Component {
           <div onClick={this.substractMinuteToBreak}>
             <PadButton>-</PadButton>
           </div>
-          <p className={`${styles.time} ${!this.state.isSessionRunning && styles.currentTime}`}>
+          <p
+            className={`${styles.time} ${!this.state.isSessionRunning && styles.currentTime} ${
+              this.state.currentBreakTime < 60000 && styles.warningTime
+            }`}
+          >
             {new Date(this.state.currentBreakTime).toTimeString().slice(3, 8)}
           </p>
           <div onClick={this.addMinuteToBreak}>
