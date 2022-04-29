@@ -147,7 +147,6 @@ export class DrumMachine extends React.Component {
     super(props);
     this.state = {
       power: true,
-      currentPadBankId: 'Snare-drum',
       volume: 0.3,
       selectedBank: 0,
       pressedTrack: '',

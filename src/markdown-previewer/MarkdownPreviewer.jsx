@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { marked } from 'marked';
 import Toolbar from 'shared/components/toolbar/Toolbar';
 import './MarkdownPreviewer.css';
-import { CSSTransition } from 'react-transition-group';
-import dropdownStyles from 'shared/transitions/drop-down/drop-down.module.css';
 const someText = `# Welcome to my React Markdown Previewer!
 
-## This is a sub-heading... {#identifier .heading1}
+## This is a sub-heading...
 ### And here's some other cool stuff:
 
 Heres some code, \`<div></div>\`, between 2 backticks.
@@ -54,35 +52,34 @@ class MarkdownPreviewer extends Component {
     super(props);
     this.state = {
       editorText: someText,
-      resized: true,
     };
   }
   render() {
     return (
       <section className='markdown'>
         <div className='editorContainer'>
-          <Toolbar
-            action={() => this.setState((ps) => ({ resized: !ps.resized }))}
-            resized={this.state.resized}
-          >
-            Editor
-          </Toolbar>
-          <CSSTransition in={this.state.resized} timeout={250} classNames={{ ...dropdownStyles }}>
+          <Toolbar action={() => this.setState((ps) => ({ resized: !ps.resized }))} title='Editor'>
             <textarea
               id='editor'
               value={this.state.editorText}
               onChange={({ target: { value } }) => this.setState({ editorText: value })}
               name='markdown editor'
               cols='50'
-              rows='40'
             />
-          </CSSTransition>
+          </Toolbar>
         </div>
-        {/* added styles with css selectors via id='preview' */}
-        <div
-          id='preview'
-          dangerouslySetInnerHTML={{ __html: marked.parse(this.state.editorText) }}
-        />
+        <div className='previewContainer'>
+          <Toolbar
+            action={() => this.setState((ps) => ({ resized: !ps.resized }))}
+            title='Previewer'
+          >
+            {/* added styles with css selectors via id='preview' */}
+            <div
+              id='preview'
+              dangerouslySetInnerHTML={{ __html: marked.parse(this.state.editorText) }}
+            />
+          </Toolbar>
+        </div>
       </section>
     );
   }

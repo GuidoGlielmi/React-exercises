@@ -5,7 +5,7 @@ import './tic-tac-toe.css';
 /*
   ANNOTATION ABOUT WORKING WITH CLASSES:
   - Whenever binding to a state (or any owned properties), that reference will always be the current one, unless saving it in another memory reference.
-  - the previous state used in setState already points to a different memory location than the actual previous state, so that variable CAN be return from the function
+  - unlike react with functions, the previous state can be returned from the setState
   - Spread operator changes the memory reference in the outer layer props, it doesn't work with inner levels (of arrays of arrays, for example).
 */
 export class Board extends React.Component {
