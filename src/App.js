@@ -11,6 +11,7 @@ import React from 'react';
 import RandomQuotesContext from 'contexts/RandomQuotes';
 import Asd from 'random-quote-generator/Asd';
 import Timer from 'timer/Timer';
+import MarkdownPreviewer from 'markdown-previewer/MarkdownPreviewer';
 // creating context in App doesn't work
 //(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='show-index' element={<Asd />} />
             {/* <Route path='random-quote-generator/asd' element={<Asd />} /> */}
           </Route>
+          <Route path='markdown' element={<MarkdownPreviewer />} />
         </Route>
         <Route path='/' element={<Navbar2 />}>
           {/* First two games will share Navbar 2 */}

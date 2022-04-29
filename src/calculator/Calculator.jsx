@@ -62,7 +62,6 @@ class Calculator extends Component {
         if (ps.lastOperator === '+') {
           ps.previousValue = parseFloat(ps.previousValue) + parseFloat(ps.enteredValue);
         }
-        if (!(ps.previousValue % 1)) ps.previousValue = Math.floor(ps.previousValue);
         // previousValue doesn't need to be string because won't be shown
         ps.calculation = `${ps.previousValue} ${value} `;
         ps.enteredValue = value; // only for display

@@ -17,7 +17,7 @@ export default class NavBar2 extends Component {
             in={this.state.displayed}
             timeout={1000}
             classNames={{ ...leftUnfoldStyles2 }}
-            unmountOnExit
+            // unmountOnExit
           >
             <div className={styles.linkListContainer}>
               <ul className={styles.linkList}>

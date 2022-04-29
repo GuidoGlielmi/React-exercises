@@ -1,0 +1,14 @@
+.enter {
+  height: 0;
+}
+.enterActive {
+  height: initial;
+  transition: height 250ms linear;
+}
+.exitActive {
+  height: 0;
+  transition: height 250ms linear;
+}
+.exitDone {
+  height: 0;
+}

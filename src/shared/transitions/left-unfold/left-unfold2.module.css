@@ -1,3 +1,4 @@
+/* appear is applied if mounted on true  */
 .enterActive {
   width: 15vw;
   transition: width 1000ms cubic-bezier(0.16, 1, 0.3, 1);

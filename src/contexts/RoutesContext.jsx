@@ -3,6 +3,7 @@ export const routesContext = React.createContext([]);
 const routes = [
   { linkName: 'Tic-Tac-Toe', path: '/tic-tac-toe' },
   { linkName: 'Random-Quote-Generator', path: '/random-quote-generator' },
+  { linkName: 'Markdown', path: '/markdown' },
   { linkName: 'Drum-Machine', path: '/drum-machine' },
   { linkName: 'Calculator', path: '/calculator' },
   { linkName: 'Random', path: '/random' },
