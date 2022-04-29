@@ -1,0 +1,42 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  /* position: sticky; sticky is affected by a flex container */
+  top: 0;
+  left: 0;
+  transform: translateX(-15vw);
+}
+ul {
+  list-style: none;
+}
+.linkListContainer {
+  width: 15vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgb(53, 53, 53) 30%,
+    rgba(53, 53, 53, 0.5) 70%,
+    rgba(0, 0, 0, 0)
+  );
+}
+.linkList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 30%;
+  margin: 5px 0;
+}
+.linkElement {
+  text-align: center;
+}
+.link {
+  height: 8vh;
+  color: #2bd5d5;
+}
+li {
+  width: 100%;
+}
+.displayButton {
+  align-self: flex-start;
+}

@@ -168,6 +168,7 @@ export class DrumMachine extends React.Component {
   render() {
     return (
       <div className={styles.drumMachine} id='drum-machine'>
+        <p>{this.state.power ? 'On' : 'Off'}</p>
         <div onClick={() => this.setState((ps) => ({ power: !ps.power }))} className={styles.bank}>
           <CSSTransition
             in={!this.state.power} //begins in false

@@ -2,11 +2,6 @@ body {
   font: 14px 'Century Gothic', Futura, sans-serif;
 }
 
-ol,
-ul {
-  padding-left: 30px;
-}
-
 .board-row:after {
   clear: both;
   content: '';
@@ -42,7 +37,10 @@ ul {
 
 .game {
   display: flex;
-  flex-direction: row;
+  width: 100%;
+  height: 92vh;
+  justify-content: center;
+  align-items: center;
 }
 .boardContainer {
   display: flex;

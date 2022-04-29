@@ -2,6 +2,8 @@ import React from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import styles from './RandomQuoteGenerator.module.css';
 import switchFadeOutInStyles from '../shared/transitions/switch-fade-out-in/switchFadeOutIn.module.css';
+import { QuotesContext } from '../contexts/RandomQuotes';
+import { Link, Outlet } from 'react-router-dom';
 export class RandomQuoteGenerator extends React.Component {
   constructor(props) {
     super(props);
@@ -13,27 +15,26 @@ export class RandomQuoteGenerator extends React.Component {
     };
     this.newQuote = this.newQuote.bind(this);
   }
-  componentDidMount() {
-    const getQuotes = async () => {
-      const rawQuotes = await fetch(
-        'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json',
-      );
-      const quotes = await rawQuotes.json();
-      this.setState({
-        quotes: quotes.quotes,
-        selectedQuote: quotes.quotes[Math.floor(Math.random() * quotes.quotes.length)],
-      });
-    };
-    getQuotes();
-  }
   getRandomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+  componentDidUpdate() {
+    this.setState((ps) => {
+      if (!ps.quotes[0]) {
+        ps.quotes = this.context.quotes;
+        const randomIndex = Math.floor(Math.random() * ps.quotes.length);
+        ps.selectedQuote = this.context.quotes[randomIndex];
+        this.context.setSelectedIndex(randomIndex);
+        return ps;
+      }
+    });
   }
   newQuote() {
     this.setState((ps) => {
       const randomIndex = Math.floor(Math.random() * ps.quotes.length);
+      this.context.setSelectedIndex(randomIndex);
       return {
-        selectedQuote: ps.quotes[randomIndex],
+        selectedQuote: ps.quotes[51],
         currentBackground: this.getRandomColor(),
         quoteTransition: !ps.quoteTransition,
       };
@@ -102,14 +103,19 @@ export class RandomQuoteGenerator extends React.Component {
                   </button>
                 </div>
                 <button onClick={this.newQuote}>New quote</button>
+                <Link to='show-index'>Show index</Link>
+                {/* Without '/' at the begging, it appends the string to the current path */}
               </div>
             </div>
           </CSSTransition>
         </SwitchTransition>
+        <Outlet /> {/*this allows to aggregate the child into the parent route component*/}
       </div>
     );
   }
 }
+RandomQuoteGenerator.contextType = QuotesContext;
+
 /* 
 import React from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
