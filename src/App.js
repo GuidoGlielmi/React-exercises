@@ -10,6 +10,7 @@ import Random from './random/Random';
 import React from 'react';
 import RandomQuotesContext from 'contexts/RandomQuotes';
 import Asd from 'random-quote-generator/Asd';
+import Timer from 'timer/Timer';
 // creating context in App doesn't work
 //(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path='drum-machine' element={<DrumMachine />} />
           <Route path='calculator' element={<Calculator />} />
           <Route path='random' element={<Random />} />
+          <Route path='25+5' element={<Timer />} />
         </Route>
         {/* <Route path='*' element={<Navigate to='/tic-tac-toe' />} /> */}
       </Routes>
