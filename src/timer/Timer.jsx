@@ -5,10 +5,10 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionTime: new Date(new Date().getTime() + 5000) - new Date(),
-      currentSessionTime: new Date(new Date().getTime() + 5000) - new Date(),
-      breakTime: new Date(new Date().getTime() + 5000) - new Date(),
-      currentBreakTime: new Date(new Date().getTime() + 5000) - new Date(),
+      sessionTime: 1500000,
+      currentSessionTime: 1500000,
+      breakTime: 300000,
+      currentBreakTime: 300000,
       stopped: true,
       isSessionRunning: true,
     };
@@ -41,7 +41,7 @@ export default class Timer extends Component {
   }
   breakSecondPassed() {
     if (this.state.currentBreakTime) {
-      this.currentBreakTimeout = this.currentBreakTimeout = setTimeout(() => {
+      this.currentBreakTimeout = setTimeout(() => {
         this.setState((ps) => ({ currentBreakTime: ps.currentBreakTime - 1000 }));
         this.breakSecondPassed();
       }, 1000);
@@ -57,36 +57,36 @@ export default class Timer extends Component {
   addMinuteToSession() {
     this.setState((ps) => {
       if (!ps.isSessionRunning) {
-        ps.currentSessionTime += 1000;
-        ps.sessionTime += 1000;
-      } else ps.currentSessionTime += 1000;
+        ps.currentSessionTime += 60000;
+        ps.sessionTime += 60000;
+      } else ps.currentSessionTime += 60000;
       return ps;
     });
   }
   substractMinuteToSession() {
     this.setState((ps) => {
       if (!ps.isSessionRunning) {
-        ps.currentSessionTime -= 1000;
-        ps.sessionTime -= 1000;
-      } else ps.currentSessionTime -= 1000;
+        ps.currentSessionTime -= 60000;
+        ps.sessionTime -= 60000;
+      } else ps.currentSessionTime -= 60000;
       return ps;
     });
   }
   addMinuteToBreak() {
     this.setState((ps) => {
       if (ps.isSessionRunning) {
-        ps.currentBreakTime += 1000;
-        ps.breakTime += 1000;
-      } else ps.currentBreakTime += 1000;
+        ps.currentBreakTime += 60000;
+        ps.breakTime += 60000;
+      } else ps.currentBreakTime += 60000;
       return ps;
     });
   }
   substractMinuteToBreak() {
     this.setState((ps) => {
       if (ps.isSessionRunning) {
-        ps.currentBreakTime -= 1000;
-        ps.breakTime -= 1000;
-      } else ps.currentBreakTime -= 1000;
+        ps.currentBreakTime -= 60000;
+        ps.breakTime -= 60000;
+      } else ps.currentBreakTime -= 60000;
       return ps;
     });
   }
@@ -104,11 +104,12 @@ export default class Timer extends Component {
     }
   }
   reset() {
-    this.currentSessionTimeout && clearTimeout(this.currentSessionTimeout);
-    this.currentBreakTimeout && clearTimeout(this.currentBreakTimeout);
+    this.state.isSessionRunning
+      ? clearTimeout(this.currentSessionTimeout)
+      : clearTimeout(this.currentBreakTimeout);
     this.setState((ps) => ({
-      currentBreakTime: ps.breakTime,
       currentSessionTime: ps.sessionTime,
+      currentBreakTime: ps.breakTime,
       stopped: true,
       isSessionRunning: true,
     }));
@@ -121,9 +122,7 @@ export default class Timer extends Component {
           <p>{this.state.isSessionRunning ? 'SESSION TIME' : 'BREAK TIME! IUJUUU!!!'}</p>
         </div>
         <div className={styles.timeContainer}>
-          <div onClick={this.substractMinuteToSession}>
-            <PadButton>-</PadButton>
-          </div>
+          <PadButton action={this.substractMinuteToSession}>-</PadButton>
           <p
             className={`${styles.time} ${this.state.isSessionRunning && styles.currentTime} ${
               this.state.currentSessionTime < 60000 && styles.warningTime
@@ -131,14 +130,10 @@ export default class Timer extends Component {
           >
             {new Date(this.state.currentSessionTime).toTimeString().slice(3, 8)}
           </p>
-          <div onClick={this.addMinuteToSession}>
-            <PadButton>+</PadButton>
-          </div>
+          <PadButton action={this.addMinuteToSession}>+</PadButton>
         </div>
         <div className={styles.timeContainer}>
-          <div onClick={this.substractMinuteToBreak}>
-            <PadButton>-</PadButton>
-          </div>
+          <PadButton action={this.substractMinuteToBreak}>-</PadButton>
           <p
             className={`${styles.time} ${!this.state.isSessionRunning && styles.currentTime} ${
               this.state.currentBreakTime < 60000 && styles.warningTime
@@ -146,17 +141,11 @@ export default class Timer extends Component {
           >
             {new Date(this.state.currentBreakTime).toTimeString().slice(3, 8)}
           </p>
-          <div onClick={this.addMinuteToBreak}>
-            <PadButton>+</PadButton>
-          </div>
+          <PadButton action={this.addMinuteToBreak}>+</PadButton>
         </div>
         <div className={styles.startAndReset}>
-          <div onClick={this.toggleStart}>
-            <PadButton>Start</PadButton>
-          </div>
-          <div onClick={this.reset}>
-            <PadButton>Reset</PadButton>
-          </div>
+          <PadButton action={this.toggleStart}>On/Off</PadButton>
+          <PadButton action={this.reset}>Reset</PadButton>
         </div>
         <audio
           ref={this.alarm}
