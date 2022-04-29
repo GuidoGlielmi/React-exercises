@@ -34,7 +34,7 @@ export class RandomQuoteGenerator extends React.Component {
       const randomIndex = Math.floor(Math.random() * ps.quotes.length);
       this.context.setSelectedIndex(randomIndex);
       return {
-        selectedQuote: ps.quotes[randomIndex],
+        selectedQuote: ps.quotes[51],
         currentBackground: this.getRandomColor(),
         quoteTransition: !ps.quoteTransition,
       };
