@@ -217,7 +217,7 @@ export class Board extends React.Component {
         </div>
         <div className='buttons'>
           <button onClick={this.reset}>Reset</button>
-          <button onClick={() => this.goBack(0)} className='goBackButton' key={0}>
+          <button onClick={() => this.goBack(0)} className='goBackButton'>
             Go to start
           </button>
           {[this.state.goBackButtons]}

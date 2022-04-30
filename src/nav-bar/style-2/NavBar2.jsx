@@ -25,7 +25,11 @@ export default class NavBar2 extends Component {
                   return (
                     <li key={i} className={styles.linkElement}>
                       <NavLink
-                        style={({ isActive }) => ({ color: isActive ? 'red' : '' })}
+                        style={(obj) => {
+                          console.log(obj); //isActive is the only property
+                          return { color: obj.isActive ? 'red' : '' };
+                        }}
+                        //<p style={props.style(obj)}>...</p>
                         className={styles.link}
                         to={rc.path}
                       >

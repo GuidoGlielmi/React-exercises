@@ -1,0 +1,13 @@
+.bank {
+  display: flex;
+  align-items: center;
+  width: max(2vw, 2vh);
+  height: max(1vw, 1vh);
+  padding: 3px;
+  background: blue;
+}
+.bankSelection {
+  width: max(1vw, 1vh);
+  height: max(1vw, 1vh);
+  background: red;
+}

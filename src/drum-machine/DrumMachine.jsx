@@ -1,8 +1,7 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import styles from './DrumMachine.module.css';
-import PadButton from '../shared/components/buttons/PadButton';
-import switchSideToSide from '../shared/transitions/switch-side-to-side/switchSideToSide.module.css';
+import { DrumPad } from './DrumPad';
+import SwitchButton from 'shared/components/buttons/SwitchButton';
 const drums = [
   {
     keyCode: 81,
@@ -110,38 +109,6 @@ const bass = [
     url: 'https://www.musicca.com/lydfiler/bass-guitar/d1.mp3',
   },
 ];
-export class DrumPad extends React.Component {
-  constructor(props) {
-    super(props);
-    this.clip = React.createRef();
-    this.play = this.play.bind(this);
-  }
-  play() {
-    const sound = this.clip.current;
-    if (!sound.ended) {
-      sound.pause();
-      sound.currentTime = 0;
-    }
-    sound.play();
-    this.props.showPressedTrack(this.props.id);
-  }
-  componentDidUpdate() {
-    // this fires when props.volume (any prop) changes
-    this.clip.current.volume = this.props.volume;
-  }
-  render() {
-    return (
-      <>
-        <PadButton action={this.play} disabled={this.props.off} keyTrigger={this.props.keyTrigger}>
-          {this.props.keyTrigger.toUpperCase()}
-          <br />
-          {this.props.id}
-        </PadButton>
-        <audio ref={this.clip} src={this.props.src} className='clip' id={this.props.keyTrigger} />
-      </>
-    );
-  }
-}
 export class DrumMachine extends React.Component {
   constructor(props) {
     super(props);
@@ -167,15 +134,11 @@ export class DrumMachine extends React.Component {
     return (
       <div className={styles.drumMachine} id='drum-machine'>
         <p>{this.state.power ? 'On' : 'Off'}</p>
-        <div onClick={() => this.setState((ps) => ({ power: !ps.power }))} className={styles.bank}>
-          <CSSTransition
-            in={!this.state.power} //begins in false
-            timeout={100}
-            classNames={{ ...switchSideToSide }}
-          >
-            <div className={styles.bankSelection}></div>
-          </CSSTransition>
-        </div>
+        <SwitchButton
+          action={() => this.setState((ps) => ({ power: !ps.power }))}
+          trigger={this.state.power}
+          timeout={100}
+        />
         <div className={styles.padsContainer}>
           <p>{!this.state.selectedBank ? 'Drums' : 'Bass'}</p>
           <div className={styles.pads}>
@@ -216,18 +179,11 @@ export class DrumMachine extends React.Component {
         </div>
         <div className={styles.switchBanks}>
           <p>Switch banks</p>
-          <div
-            onClick={() => this.setState((ps) => ({ selectedBank: ps.selectedBank === 0 ? 1 : 0 }))}
-            className={styles.bank}
-          >
-            <CSSTransition
-              in={!!this.state.selectedBank} //begins in false
-              timeout={100}
-              classNames={{ ...switchSideToSide }}
-            >
-              <div className={styles.bankSelection}></div>
-            </CSSTransition>
-          </div>
+          <SwitchButton
+            action={() => this.setState((ps) => ({ selectedBank: ps.selectedBank === 0 ? 1 : 0 }))}
+            trigger={!this.state.selectedBank}
+            timeout={100}
+          />
         </div>
       </div>
     );
