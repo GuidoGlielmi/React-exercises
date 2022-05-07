@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Child from './Child';
 
 export default function RandomAsFunction() {
   const [first, setFirst] = useState({ first: 'first' });
@@ -25,6 +26,7 @@ export default function RandomAsFunction() {
         THIRD: NOW CHANGE THE MEMORY REFERENCE OF THE SECOND (ANY) STATE TO SEE HOW THE PREVIOUS
         CHANGE IN THE PROPERTY IS REFLECTED ON THE UI
       </button>
+      <Child randomProp={first} />
     </div>
   );
 }

@@ -12,6 +12,8 @@ import RandomQuotesContext from 'contexts/RandomQuotes';
 import Asd from 'random-quote-generator/Asd';
 import Timer from 'timer/Timer';
 import MarkdownPreviewer from 'markdown-previewer/MarkdownPreviewer';
+import RandomContext from 'contexts/RandomContext';
+import Qwe from 'contexts/Qwe';
 // creating context in App doesn't work
 //(error: cannot access lexical declaration -RoutesContext- before initialization)
 function App() {
@@ -42,7 +44,15 @@ function App() {
           {/* First two games will share Navbar 2 */}
           <Route path='drum-machine' element={<DrumMachine />} />
           <Route path='calculator' element={<Calculator />} />
-          <Route path='random' element={<Random />} />
+          <Route
+            path='random'
+            element={
+              <RandomContext>
+                <Qwe />
+                <Random />
+              </RandomContext>
+            }
+          />
           <Route path='25+5' element={<Timer />} />
         </Route>
         {/* <Route path='*' element={<Navigate to='/tic-tac-toe' />} /> */}

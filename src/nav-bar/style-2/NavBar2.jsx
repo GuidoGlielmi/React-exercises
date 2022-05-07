@@ -26,7 +26,7 @@ export default class NavBar2 extends Component {
                     <li key={i} className={styles.linkElement}>
                       <NavLink
                         style={(obj) => {
-                          console.log(obj); //isActive is the only property
+                          //console.log(obj); //isActive is the only property
                           return { color: obj.isActive ? 'red' : '' };
                         }}
                         //<p style={props.style(obj)}>...</p>
